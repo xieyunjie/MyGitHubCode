@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+	<persistence-unit name="mmmsJPA" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>com.balintimes.MMMS.Beans.FrameworkCity</class>
+		<class>com.balintimes.MMMS.Beans.FrameworkCompany</class>
+		<class>com.balintimes.MMMS.Beans.MembershipAuthority</class>
+		<class>com.balintimes.MMMS.Beans.MembershipResource</class>
+		<class>com.balintimes.MMMS.Beans.MembershipResourceAuthority</class>
+		<class>com.balintimes.MMMS.Beans.MembershipRole</class>
+		<class>com.balintimes.MMMS.Beans.MembershipRoleAuthority</class>
+		<class>com.balintimes.MMMS.Beans.MembershipUser</class>
+		<class>com.balintimes.MMMS.Beans.MembershipUserRole</class>
+ 
+		<properties>
+			<!--配置Hibernate方言 -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+			<!--配置数据库驱动 -->
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+			<!--配置数据库用户名 -->
+			<property name="hibernate.connection.username" value="sa" />
+			<!--配置数据库密码 -->
+			<property name="hibernate.connection.password" value="sa1234" />
+			<!--配置数据库url -->
+			<property name="hibernate.connection.url" value="jdbc:mysql://172.16.0.250:3306/ecenter?useUnicode=true&amp;characterEncoding=UTF-8" />
+			<!--设置外连接抓取树的最大深度 -->
+			<property name="hibernate.max_fetch_depth" value="3" />
+			<!--自动输出schema创建DDL语句 -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="false" />
+			<property name="javax.persistence.validation.mode" value="none" />
+		</properties>
+	</persistence-unit>
+
+</persistence>
