@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<h:head>Add new car
+<f:metadata>
+		<f:viewParam name="actionType" value="#{modifyCarController.actionString}"></f:viewParam>
+	</f:metadata>
+</h:head>
+<body>
+	<ui:composition template="/share/handleLayout.xhtml">
+		<ui:define name="content">
+			<p:outputLabel value="#{modifyCarController.actionString}"></p:outputLabel>
+			<h:panelGrid id="careeditor" columns="4" cellspacing="4">
+				<f:facet name="editorheader">标题</f:facet>
+				<p:outputLabel value="Model:" />
+				<p:inputText value="#{modifyCarController.modifyCar.model}" />
+
+				<p:outputLabel value="Year:" />
+				<p:inputText value="#{modifyCarController.modifyCar.year}" />
+
+				<p:outputLabel value="Manufacturer:" />
+				<p:inputText value="#{modifyCarController.modifyCar.manufacturer}" />
+
+				<p:outputLabel value="Color:" />
+				<p:inputText value="#{modifyCarController.modifyCar.model}" />
+
+				<f:facet name="footer">
+					<p:commandButton value="Save" action="#{modifyCarController.Save}"></p:commandButton>
+					<p:commandButton value="Go Back" action="home?faces-redirect=true" immediate="true"></p:commandButton>
+				</f:facet>
+			</h:panelGrid>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

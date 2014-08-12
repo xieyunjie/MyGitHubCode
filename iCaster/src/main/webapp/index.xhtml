@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:module="http://java.sun.com/jsf/composite/module">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/share/_layout.xhtml">
+		<ui:define name="content">
+			<h:form>
+
+				<p:commandButton value="test" actionListener="#{testController.testInject()}" update=":grobalgrowl" />
+				<p:commandButton value="addCtiy" actionListener="#{testController.AddCity()}" update=":grobalgrowl" />
+				<p:commandButton value="updateCompany" actionListener="#{testController.UpdateCompanyCity()}" update=":grobalgrowl" />
+
+				<br />
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+	<a href="admin.jsf">查看受保护页面</a>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<!-- 	<h:inputText value="#{flash.selectedcar.model}" /><br />
+	<h:inputText value="#{flash.selectedcar.manufacturer}" /><br /> -->
+	<h:form>
+		<p:inputText value="#{homeController.selectedCar.model}" />
+		<br />
+		<p:inputText value="#{homeController.selectedCar.manufacturer}" required="true" />
+		<br />
+		<p:commandButton action="#{homeController.UpdateCar}" value="Update" />
+		<p:commandButton action="home" value="Go Back"  immediate="true"/>
+
+	</h:form>
+</body>
+</html>

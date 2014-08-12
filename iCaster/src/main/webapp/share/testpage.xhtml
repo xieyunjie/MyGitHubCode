@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputScript name="primefaces_locales.js" library="js" />
+</h:head>
+<body>
+	<ui:composition template="/share/_layout.xhtml">
+		<ui:define name="content">
+			<h:form>
+				<h5>this is content!!</h5>
+				<br />
+				<p:calendar mode="inline" id="inlineCal" />
+				<br />
+
+				<p:commandButton value="测试下" actionListener="#{loginController.testRedirect}" ajax="false"></p:commandButton>
+
+				<p:commandButton value="ChangePassword" onclick="PF('dlg').show();"></p:commandButton>
+				
+				
+				<p:dialog id="changedialog" widgetVar="dlg">
+					<h:panelGrid columns="2" cellpadding="5">
+
+						<h:outputLabel for="name" value="Name:" />
+						<p:inputText id="name" label="name" />
+
+						<h:outputLabel for="surname" value="Surname:" />
+						<p:inputText id="surname" label="surname" />
+
+						<h:outputLabel for="telephone" value="Telephone:" />
+						<p:inputText id="telephone" label="telephone" />
+
+					</h:panelGrid>
+				</p:dialog>
+
+			</h:form>
+		</ui:define>
+
+	</ui:composition>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet name="primefacesCustomer.css" library="css" />
+</h:head>
+<style>
+#warp {
+	position: absolute;
+	width: auto;
+	height: auto;
+	left: 50%;
+	top: 50%;
+	margin-left: -250px;
+	margin-top: -100px;
+}
+</style>
+<body>
+
+	<div id="warp">
+		<h:form id="loginForm" prependId="false">
+			<h:message for="loginForm" showSummary="true" showDetail="false" style="color:red" />
+
+			<p:panelGrid columns="3" border="0">
+				<f:facet name="header">
+					<h3>#{msgs.loginFormTitle}</h3>
+				</f:facet>
+				<p:outputLabel for="j_username" value="#{msgs.username}" style="font-weight:bold" />
+				<p:inputText id="j_username" required="true" />
+				<h:message for="j_username" showSummary="true" showDetail="false" />
+
+				<p:outputLabel for="j_password" value="#{msgs.password}" style="font-weight:bold" />
+				<p:password id="j_password" required="true" />
+				<h:message for="j_password" showSummary="true" showDetail="false" />
+
+
+				<f:facet name="footer">
+					<p:commandButton id="login" actionListener="#{loginController.doLogin()}" ajax="false" value="#{msgs.login}" icon="ui-icon-check"
+						style="margin:0" />
+				</f:facet>
+			</p:panelGrid>
+
+		</h:form>
+	</div>
+</body>
+</html>

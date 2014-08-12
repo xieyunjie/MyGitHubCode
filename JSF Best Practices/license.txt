@@ -1,0 +1,2 @@
+Copyright (C) 2001-2011 Orientation in Objects GmbH Weinheimer Str. 68, D - 68309 Mannheim, Germany All rights reserved.
+Reverse Engineering, Aendern und Erweitern dieser Software ist nur mit ausdruecklicher schriftlicher Genehmigung von Orientation in Objects gestattet.

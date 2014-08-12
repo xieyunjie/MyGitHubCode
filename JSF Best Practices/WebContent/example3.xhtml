@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+
+</h:head>
+
+<body>
+
+<h:outputStylesheet library="oio" name="styles.css" />
+
+<h:form>
+
+	<h1><h:outputText value="Example 3"/></h1>
+	<h:dataTable value="#{addressTableBeanExample3.addresses}" var="address" >
+
+		<h:column>
+			<f:facet name="header" >
+			    <h:outputText value="Name"/>
+			</f:facet>    
+			<h:outputText value="#{address.name}" />
+		</h:column>	
+
+		<h:column>
+			<f:facet name="header" >
+			    <h:outputText value="Street"/>
+			</f:facet>    
+			<h:outputText value="#{address.street}" />
+		</h:column>	
+		
+		<h:column>
+			<f:facet name="header" >
+			    <h:outputText value="ZIP"/>
+			</f:facet>    
+			<h:outputText value="#{address.zipCode}" />
+		</h:column>	
+
+		<h:column>
+			<f:facet name="header" >
+			    <h:outputText value="City"/>
+			</f:facet>    
+			<h:outputText value="#{address.city}" />
+		</h:column>	
+		
+		<h:column>
+		
+			<h:commandButton value="delete" actionListener="#{addressTableBeanExample3.delete}" >
+				<f:attribute name="selected" value="#{address}" />
+			</h:commandButton>
+			
+		</h:column>	
+					
+	</h:dataTable>
+	
+
+</h:form>
+
+</body>
+
+</html>

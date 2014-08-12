@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet name="primefacesCustomer.css" library="css"></h:outputStylesheet>
+</h:head>
+<body>
+
+
+	<h:form> 
+		<p:panelGrid columns="2">
+			<f:facet name="header">  
+        Basic PanelGrid  
+    </f:facet>
+
+			<h:outputLabel for="firstname" value="Firstname: *" />
+			<p:inputText id="firstname" value="" label="Firstname" />
+
+			<h:outputLabel for="surname" value="Surname: *" />
+			<p:inputText id="surname" value="" required="true" label="Surname" />
+
+			<f:facet name="footer">
+				<p:commandButton type="button" value="Save" icon="ui-icon-check" style="margin:0" />
+			</f:facet> 
+		</p:panelGrid>
+	</h:form>
+
+</body>
+</html>

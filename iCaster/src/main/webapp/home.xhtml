@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/share/masterLayout.xhtml">
+		<ui:define name="content">
+			<p:dataTable var="car" value="#{homeController.carsSmall}" selectionMode="single" selection="#{homeController.selectedCar}" rowKey="#{car.model}">
+
+				<p:ajax event="rowSelect" listener="#{homeController.onRowSelect}" />
+
+
+				<p:column headerText="Model">
+					<h:outputText value="#{car.model}" />
+				</p:column>
+
+				<p:column headerText="Year">
+					<h:outputText value="#{car.year}" />
+				</p:column>
+
+				<p:column headerText="Manufacturer">
+					<h:outputText value="#{car.manufacturer}" />
+				</p:column>
+
+				<p:column headerText="Color">
+					<h:outputText value="#{car.color}" />
+				</p:column>
+				<f:facet name="footer">
+					<p:commandButton id="viewButton" value="View" icon="ui-icon-search" oncomplete="PF('carDialog').show()" update=":masterfrom:display" />
+					<p:commandButton id="viewButton2" value="View no update" icon="ui-icon-search" oncomplete="PF('carDialog').show()" />
+				</f:facet>
+			</p:dataTable>
+			<p:dialog id="dialog" header="Car Detail" widgetVar="carDialog" resizable="false" width="200" showEffect="clip" hideEffect="fold">
+
+				<h:panelGrid id="display" columns="2" cellpadding="4">
+
+					<h:outputText value="Model:" />
+					<h:outputText value="#{homeController.selectedCar.model}" />
+
+					<h:outputText value="Year:" />
+					<h:outputText value="#{homeController.selectedCar.year}" />
+
+					<h:outputText value="Manufacturer:" />
+					<h:outputText value="#{homeController.selectedCar.manufacturer}" />
+
+					<h:outputText value="Color:" />
+					<h:outputText value="#{homeController.selectedCar.color}" />
+				</h:panelGrid>
+			</p:dialog>
+		</ui:define>
+		<ui:define name="operate">
+
+			<p:commandButton id="viewButtonxx" value="View" icon="ui-icon-search" action="#{homeController.AddNewCarView()}" ajax="false" />
+			<h:link value="测试传值" outcome="modifyCar">
+				<f:param name="testString" value="1234567890"></f:param>
+			</h:link>
+			<p:menu>
+				<p:submenu label="基本操作">
+
+					<p:menuitem value="添加" icon="ui-icon-disk" outcome="addnewcar" ajax="false">
+						<f:param name="actionType" value="Create" />
+					</p:menuitem>
+
+					<p:menuitem value="添加2" icon="ui-icon-disk" action="#{homeController.AddNewCarView}" ajax="false">
+
+					</p:menuitem>
+
+					<p:menuitem value="修改" icon="ui-icon-arrowrefresh-1-w" action="#{homeController.UpdateCarView}" ajax="false" />
+					<p:menuitem value="删除" icon="ui-icon-close" action="#{homeController.DeleteCarView}" ajax="false" />
+
+
+					<p:menuitem value="测试传值" icon="ui-icon-close" outcome="modifyCar">
+						<f:param name="testString" value="1234567890"></f:param>
+					</p:menuitem>
+				</p:submenu>
+
+				<p:submenu label="审核">
+					<p:menuitem value="审核通过" icon="ui-icon-disk" />
+					<p:menuitem value="不通过" icon="ui-icon-arrowrefresh-1-w" />
+					<p:menuitem value="反审" icon="ui-icon-close" />
+				</p:submenu>
+
+			</p:menu>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

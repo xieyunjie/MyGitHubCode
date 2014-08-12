@@ -1,0 +1,11 @@
+html, body {
+	font-family: Verdana, Arial, sans-serif;
+}
+
+table {
+	width:100%;
+}
+
+tr {
+	background-color: #dcdcdc;
+}

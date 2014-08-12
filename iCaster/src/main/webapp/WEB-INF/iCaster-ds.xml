@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd">
+	<!-- The datasource is bound into JNDI at this location. We reference this
+		in META-INF/persistence.xml -->
+	<datasource jndi-name="java:jboss/iCasterDS" pool-name="iCasterDS_pool" enabled="true" use-java-context="true">
+		<connection-url>
+			jdbc:mysql://172.16.0.250:3306/mmms?useUnicode=true&amp;characterEncoding=UTF-8
+		</connection-url>
+		<driver>mysql</driver>
+		<pool>
+			<min-pool-size>10</min-pool-size>
+			<max-pool-size>20</max-pool-size>
+			<prefill>true</prefill>
+			<use-strict-min>false</use-strict-min>
+			<flush-strategy>FailingConnectionOnly</flush-strategy>
+		</pool>
+		<security>
+			<user-name>sa</user-name>
+			<password>sa1234</password>
+		</security>
+		<validation>
+			<validate-on-match>false</validate-on-match>
+			<background-validation>false</background-validation>
+			<use-fast-fail>false</use-fast-fail>
+		</validation>
+	</datasource>
+</datasources>

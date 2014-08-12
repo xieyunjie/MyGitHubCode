@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security" xmlns:beans="http://www.springframework.org/schema/beans" xmlns:cdi="http://www.jboss.org/schema/seam/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+						http://www.springframework.org/schema/security 
+						http://www.springframework.org/schema/security/spring-security-3.2.xsd
+						http://www.jboss.org/schema/seam/spring 
+						http://www.jboss.org/schema/seam/spring/seam-spring.xsd">
+
+	<global-method-security pre-post-annotations="enabled " />
+	<http pattern="/login.jsf" security="none" />
+	<http pattern="/loginfailure.jsf" security="none" />
+	<http pattern="/error/*" security="none" />
+	<http pattern="/share/*" security="none" />
+	<http pattern="/jaxrs/*/**" security="none" />
+	<http pattern="/javax.faces.*/**" security="none" />
+	<!--<http pattern="/javax.faces.resource/*" security="none" />
+		<http pattern="/javax.faces.resource/jquery/*" security="none" /> -->
+
+	<!-- <http use-expressions="true" auto-config="true"> -->
+	<!-- <http use-expressions="true" entry-point-ref="authenticationProcessingFilterEntryPoint"> -->
+	<http use-expressions="true">
+
+		<!-- <intercept-url pattern="/login.jsf" access="permitAll" /> -->
+		<anonymous enabled="false" />
+
+		<!-- 登录界面管理 -->
+		<form-login login-page="/login.jsf" default-target-url="/index.jsf" always-use-default-target="true" authentication-failure-url="/timeout.jsf" />
+		<logout logout-success-url="/index.jsf" invalidate-session="true" />
+
+		<!-- remember-me 设置 (貌似与seam-spring冲突，无效) -->
+		<!-- <remember-me key="jbcpPetStore" /> -->
+
+		<!-- login 过滤器 -->
+		<custom-filter ref="myLoginFilter" before="FORM_LOGIN_FILTER" />
+		<!-- FILTER_SECURITY_INTERCEPTOR Spring Security默认的Filter -->
+		<custom-filter ref="myFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+	</http>
+
+	<beans:bean id="authenticationProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<beans:property name="loginFormUrl" value="/login.jsf" />
+	</beans:bean>
+
+	<beans:bean id="myLoginFilter" class="iCaster.Security.WebUsernamePasswordAuthenticationFilter">
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<!-- <beans:property name="authenticationSuccessHandler" ref="loginLogAuthenticationSuccessHandler" /> -->
+		<!-- 验证失败后的处理 -->
+		<!-- <beans:property name="authenticationFailureHandler" ref="simpleUrlAuthenticationFailureHandler" /> -->
+	</beans:bean>
+
+	<!-- 自定义过滤器 -->
+	<beans:bean id="myFilter" class="iCaster.Security.WebSecurityFilterInterceptor">
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="accessDecisionManager" ref="webAccessDecisionManager" />
+		<beans:property name="securityMetadataSource" ref="webSecurityMetadataSource" />
+	</beans:bean>
+
+	<!-- 配置认证管理器 -->
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider ref="daoAuthenticationProvider" />
+	</authentication-manager>
+
+	<cdi:bean-manager />
+	<cdi:bean-reference id="springMembershipResourceService" type="iCaster.Security.SpringMembershipResourceService" />
+	<cdi:bean-reference id="userService" type="iCaster.Security.SpringMembershipUserService" />
+
+	<beans:bean id="webUserDetailService" class="iCaster.Security.WebUserDetailService">
+		<beans:property name="userService" ref="userService"></beans:property>
+	</beans:bean>
+
+	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
+	<beans:bean id="webAccessDecisionManager" class="iCaster.Security.WebAccessDecisionManager" />
+
+	<!-- 资源权限关系，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色去访问 -->
+	<beans:bean id="webSecurityMetadataSource" class="iCaster.Security.WebSecurityMetadataSource">
+		<beans:property name="resourcesService" ref="springMembershipResourceService" />
+	</beans:bean>
+
+	<beans:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<beans:property name="userDetailsService" ref="webUserDetailService" />
+		<beans:property name="passwordEncoder" ref="passwordEncoder" />
+		<beans:property name="saltSource" ref="saltSource" />
+		<beans:property name="hideUserNotFoundExceptions" value="false" />
+	</beans:bean>
+
+	<!-- md5密码验证 -->
+	<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+	<!-- 加盐值 -->
+	<beans:bean id="saltSource" class="org.springframework.security.authentication.dao.ReflectionSaltSource">
+		<beans:property name="userPropertyToUse" value="username" />
+	</beans:bean>
+</beans:beans> 

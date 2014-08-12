@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+
+</h:head>
+
+<body>
+
+<h:outputStylesheet library="oio" name="styles.css" />
+
+<h:form id="form">
+
+ 	<h1><h:outputText value="Example 4"/></h1>
+
+	<h:dataTable value="#{addressTableBeanExample4.data}" var="data">
+		<h:column id="firstname">
+			<f:facet name="header">
+				<h:outputText value="Firstname"/>
+			</f:facet>
+			<h:outputText value="#{data.firstname}" />
+		</h:column>
+	
+		<h:column id="lastname">
+			<f:facet name="header">
+				<h:outputText value="Lastname" />
+			</f:facet>
+			<h:outputText value="#{data.lastname}" />
+		</h:column>
+
+		<h:column id="customerId">
+			<f:facet name="header">
+				<h:outputText value="Customer ID" />
+			</f:facet>
+			<h:outputText value="#{data.customerId}" />
+		</h:column>
+
+		<h:column id="action">
+			<h:commandButton value="Select" actionListener="#{addressTableBeanExample4.selectionListener}">
+				<f:attribute name="selection" value="#{data}"/>			
+			</h:commandButton>
+		</h:column>
+
+	</h:dataTable>
+
+	
+	<p>
+	<b><h:outputText value="Selected Customer: " rendered="#{null !=  addressTableBeanExample4.selected}"/></b> <h:outputText value="#{addressTableBeanExample4.selected}" />
+	</p>
+
+
+</h:form>
+
+</body>
+
+</html>
